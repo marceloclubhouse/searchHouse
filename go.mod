@@ -1,4 +1,4 @@
-module searchhouse
+module searchHouse
 
 go 1.23
 

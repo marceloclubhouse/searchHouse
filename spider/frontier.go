@@ -23,7 +23,7 @@ func (f *Frontier) Init() {
 		log.Fatal(err)
 	}
 	if !exists {
-		log.Println("Creating SQLite database for frontier...")
+		log.Println("frontier - Creating SQLite database for frontier...")
 		file, err := os.Create("frontier.db")
 		if err != nil {
 			log.Fatal(err)
@@ -47,7 +47,7 @@ func (f *Frontier) createTable() {
 	if !f.initialized {
 		log.Fatal("Must initialize database connection before operating on it")
 	}
-	log.Println("Creating table frontier and indexes...")
+	log.Println("frontier - Creating table frontier and indexes...")
 	createDB := `CREATE TABLE IF NOT EXISTS frontier (
 					url TEXT PRIMARY KEY,
 					goroutine INT NOT NULL

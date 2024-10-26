@@ -5,9 +5,8 @@ type StringSet struct {
 }
 
 func (s *StringSet) Add(str string) {
-	// Initialize set
 	if s.m == nil {
-		s.m = map[string]bool{}
+		s.m = make(map[string]bool)
 	}
 	s.m[str] = true
 }
@@ -17,12 +16,11 @@ func (s *StringSet) Remove(str string) {
 }
 
 func (s *StringSet) Contains(str string) bool {
-	_, contains := s.m[str]
-	return contains
+	return s.m[str]
 }
 
 func (s *StringSet) Merge(right StringSet) {
-	for key, _ := range right.m {
+	for key := range right.m {
 		s.Add(key)
 	}
 }

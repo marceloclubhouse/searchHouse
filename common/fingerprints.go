@@ -1,4 +1,4 @@
-package spider
+package common
 
 import (
 	"hash/fnv"
@@ -11,7 +11,7 @@ import (
 // fingerprint.
 
 type Fingerprints struct {
-	mu      sync.Mutex
+	Mu      sync.Mutex
 	n       int
 	fpSet   map[uint32]map[*WebPage]bool
 	maxSize int
@@ -43,7 +43,7 @@ func (fp *Fingerprints) nGramsToHashes(nGrams []string) []uint32 {
 func (fp *Fingerprints) InsertFingerprintsUsingWebpage(wp *WebPage) {
 	nGrams := fp.nGram(wp.Body)
 	hashes := fp.nGramsToHashes(nGrams)
-	fp.mu.Lock()
+	fp.Mu.Lock()
 	for _, h := range hashes {
 		if h%uint32(fp.n) == 0 {
 			fp.maintainSizeLimit()
@@ -55,7 +55,7 @@ func (fp *Fingerprints) InsertFingerprintsUsingWebpage(wp *WebPage) {
 			}
 		}
 	}
-	fp.mu.Unlock()
+	fp.Mu.Unlock()
 }
 
 func (fp *Fingerprints) GetFingerprintsAsSet() map[uint32]map[*WebPage]bool {

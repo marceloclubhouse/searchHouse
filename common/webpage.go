@@ -1,4 +1,4 @@
-package spider
+package common
 
 import (
 	"encoding/json"
@@ -14,7 +14,7 @@ type WebPage struct {
 	Url          string `json:"url"`
 	Response     string `json:"response"`
 	Body         string `json:"body"`
-	fingerprints *Fingerprints
+	Fingerprints *Fingerprints
 }
 
 func NewWebPage(time int64, url string, response string, body string) *WebPage {
@@ -23,9 +23,9 @@ func NewWebPage(time int64, url string, response string, body string) *WebPage {
 		Url:          url,
 		Response:     response,
 		Body:         body,
-		fingerprints: NewFingerprints(3, 1000),
+		Fingerprints: NewFingerprints(3, 1000),
 	}
-	wp.fingerprints.InsertFingerprintsUsingWebpage(wp)
+	wp.Fingerprints.InsertFingerprintsUsingWebpage(wp)
 	return wp
 }
 
@@ -99,8 +99,8 @@ func (wp *WebPage) extractText() string {
 
 func (wp *WebPage) Similarity(webPage *WebPage) float64 {
 	intersection := 0
-	left := wp.fingerprints.GetFingerprintsAsSet()
-	right := webPage.fingerprints.GetFingerprintsAsSet()
+	left := wp.Fingerprints.GetFingerprintsAsSet()
+	right := webPage.Fingerprints.GetFingerprintsAsSet()
 	for hash := range left {
 		if _, exists := right[hash]; exists {
 			intersection++

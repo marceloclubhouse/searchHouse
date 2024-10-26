@@ -17,9 +17,9 @@ at a high volume as the beginning of my search engine pipeline.
 
 ### Installation
 ```
-git clone https://github.com/marceloclubhouse/searchhouse
-cd searchhouse
-go install searchhouse
+git clone https://github.com/marceloclubhouse/searchHouse
+cd searchHouse
+go install searchHouse
 go run main.go -h
 ```
 
